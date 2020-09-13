@@ -3,6 +3,7 @@ import os
 import pymongo
 from twilio.twiml.messaging_response import MessagingResponse
 from flask import Flask, request, redirect
+from twilio.twiml.voice_response import Play, VoiceResponse
 
 app = Flask(__name__)
 
@@ -23,11 +24,25 @@ def outgoing_call():
     call = client.calls.create(
         to="+18326006867",
         from_="+15122014739",
-        url="http://demo.twilio.com/docs/voice.xml"
+        url="https://prank-meme.herokuapp.com/answer"
     )
+
+    response = VoiceResponse()
+    response.play('https://api.twilio.com/cowbell.mp3')
+
     print(call.sid)
     return str(call.sid)
     
+@app.route("/answer", methods=['GET', 'POST'])
+def answer_call():
+    """Respond to incoming phone calls with a brief message."""
+    # Start our TwiML response
+    resp = VoiceResponse()
+
+    # Read a message aloud to the caller
+    resp.say("Thank you for calling! Have a great day.", voice='alice')
+
+    return str(resp)
 
 @app.route("/sms", methods=['GET', 'POST'])
 def incoming_sms():
