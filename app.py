@@ -119,7 +119,7 @@ def outgoing_call():
             from_="+15122014739",
             url="http://prank-meme.herokuapp.com/johncena"
         )
-    elif type_of_message == "howuare":
+    elif type_of_message == "howur":
         call = client.calls.create(
             to="+1" + content["phone"],
             from_="+15122014739",
