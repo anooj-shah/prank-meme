@@ -27,9 +27,6 @@ def outgoing_call():
         url="https://prank-meme.herokuapp.com/answer"
     )
 
-    response = VoiceResponse()
-    response.play('https://api.twilio.com/cowbell.mp3')
-
     print(call.sid)
     return str(call.sid)
     
@@ -38,7 +35,8 @@ def answer_call():
     """Respond to incoming phone calls with a brief message."""
     # Start our TwiML response
     resp = VoiceResponse()
-
+    # response = VoiceResponse()
+    # response.play('https://api.twilio.com/cowbell.mp3')
     # Read a message aloud to the caller
     resp.say("Thank you for calling! Have a great day.", voice='alice')
 
