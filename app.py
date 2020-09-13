@@ -48,7 +48,12 @@ def outgoing_call():
             from_="+15122014739",
             url="http://prank-meme.herokuapp.com/road"
         )
-    
+    elif type_of_message == "car":
+        call = client.calls.create(
+            to="+1" + content["phone"],
+            from_="+15122014739",
+            url="http://prank-meme.herokuapp.com/car"
+        )
     print(call.sid)
     return str(call.sid)
     
@@ -85,6 +90,16 @@ def road():
 
     return str(response)
 
+@app.route("/car", methods=['GET', 'POST'])
+def car():
+    """Respond to incoming phone calls with a brief message."""
+    # Start our TwiML response
+    response = VoiceResponse()
+    response.play('https://youcustomizeit.s3.us-east-2.amazonaws.com/car.mp3')
+    # Read a message aloud to the caller
+    # response.say("Thank you for calling! Have a great day.")
+
+    return str(response)
 @app.route("/sms", methods=['GET', 'POST'])
 def incoming_sms():
     """Send a dynamic reply to an incoming text message"""
