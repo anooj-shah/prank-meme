@@ -42,13 +42,18 @@ def outgoing_call():
             from_="+15122014739",
             url="http://prank-meme.herokuapp.com/askyouhowyouare"
         )
+    elif type_of_message == "road":
+        call = client.calls.create(
+            to="+1" + content["phone"],
+            from_="+15122014739",
+            url="http://prank-meme.herokuapp.com/road"
+        )
     
-
     print(call.sid)
     return str(call.sid)
     
 @app.route("/askyouhowyouare", methods=['GET', 'POST'])
-def answer():
+def askyouhowyouare():
     """Respond to incoming phone calls with a brief message."""
     # Start our TwiML response
     response = VoiceResponse()
@@ -59,11 +64,22 @@ def answer():
     return str(response)
 
 @app.route("/johncena", methods=['GET', 'POST'])
-def answer():
+def johncena():
     """Respond to incoming phone calls with a brief message."""
     # Start our TwiML response
     response = VoiceResponse()
     response.play('https://youcustomizeit.s3.us-east-2.amazonaws.com/John+Cena+Meme+Original+Remastered+HD.mp3')
+    # Read a message aloud to the caller
+    # response.say("Thank you for calling! Have a great day.")
+
+    return str(response)
+
+@app.route("/road", methods=['GET', 'POST'])
+def road():
+    """Respond to incoming phone calls with a brief message."""
+    # Start our TwiML response
+    response = VoiceResponse()
+    response.play('https://youcustomizeit.s3.us-east-2.amazonaws.com/road.mp3')
     # Read a message aloud to the caller
     # response.say("Thank you for calling! Have a great day.")
 
