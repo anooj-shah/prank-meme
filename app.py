@@ -26,12 +26,12 @@ def main():
 def outgoing_call():
     """Send a dynamic phone call"""
     print("CONSOLE", request)
-    content = request.get_json()
+    content = request.json
     print("REQUEST", content)
-    print(content.phone)
+    print(content["phone"])
     # phone_number = request.data.phone
     call = client.calls.create(
-        to="+1" + content.phone,
+        to="+1" + content["phone"],
         from_="+15122014739",
         url="http://prank-meme.herokuapp.com/answer"
     )
