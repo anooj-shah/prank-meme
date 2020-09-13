@@ -26,7 +26,7 @@ def main():
 @cross_origin()
 def outgoing_call():
     """Send a dynamic phone call"""
-    content = request.get_json()
+    content = request.json
     print("REQUEST", content, content.phone)
     # phone_number = request.data.phone
     call = client.calls.create(
