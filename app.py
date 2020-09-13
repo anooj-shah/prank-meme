@@ -28,7 +28,7 @@ def outgoing_call():
     content = request.json
     type_of_message = content["type"]
     # phone_number = request.data.phone
-    mp3_url="http://prank-meme.herokuapp.com/answer"
+    # mp3_url="http://prank-meme.herokuapp.com/answer"
 
     if type_of_message == "johncena":
         call = client.calls.create (
@@ -36,12 +36,13 @@ def outgoing_call():
             from_="+15122014739",
             url="http://prank-meme.herokuapp.com/johncena"
         )
-    elif:
+    elif type_of_message == "howuare":
         call = client.calls.create(
             to="+1" + content["phone"],
             from_="+15122014739",
             url="http://prank-meme.herokuapp.com/askyouhowyouare"
         )
+    
 
     print(call.sid)
     return str(call.sid)
