@@ -30,7 +30,7 @@ def outgoing_call():
     print("REQUEST", content.phone)
     # phone_number = request.data.phone
     call = client.calls.create(
-        to="+18326006867",
+        to="+1" + content.phone,
         from_="+15122014739",
         url="http://prank-meme.herokuapp.com/answer"
     )
