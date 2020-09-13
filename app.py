@@ -11,19 +11,22 @@ auth_token = os.environ['TWILIO_AUTH_TOKEN']
 client = Client(account_sid, auth_token)
 
 
-@app.route('/')
+@app.route('/', methods=['GET'])
 def main():
-    return 'Message Forwarding System'
+    return {
+        "api_stuff": "success",
+    }
 
 @app.route("/call", methods=['GET', 'POST'])
 def outgoing_call():
     """Send a dynamic phone call"""
     call = client.calls.create(
-        to="+8326006867",
+        to="+18326006867",
         from_="+15122014739",
         url="http://demo.twilio.com/docs/voice.xml"
     )
     print(call.sid)
+    return str(call.sid)
     
 
 @app.route("/sms", methods=['GET', 'POST'])
