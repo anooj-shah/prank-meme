@@ -5,6 +5,7 @@ from twilio.twiml.messaging_response import MessagingResponse
 from flask import Flask, request, redirect
 from twilio.twiml.voice_response import Play, VoiceResponse
 from flask_cors import CORS, cross_origin
+import random
 
 app = Flask(__name__)
 
@@ -20,6 +21,23 @@ def main():
     return {
         "api_stuff": "success",
     }
+
+@app.route('/image', methods=['GET', 'POST'])
+@cross_origin()
+def image():
+    images = ["https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSZCdzyXGUg2Gbcdc3fujKiLchsBxFVGpvNNA&usqp=CAU", "https://static.wikia.nocookie.net/arresteddevelopment/images/d/d1/2017_Lego_Batman_Premiere_-_Michael_Cera_01.jpg/revision/latest/top-crop/width/360/height/450?cb=20170624164358"]
+    random_number = random.randint(0,1)
+    content = request.json
+    phone = content["phone"]
+    message = client.messages.create(
+        body='',
+        from_='+15122014739',
+        media_url=[images[random_number]],
+        to='+1' + phone
+    )
+
+    print(message.sid)
+    return str(message.sid)
 
 @app.route("/call", methods=['GET', 'POST'])
 @cross_origin()
