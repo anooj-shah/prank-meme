@@ -4,8 +4,12 @@ import pymongo
 from twilio.twiml.messaging_response import MessagingResponse
 from flask import Flask, request, redirect
 from twilio.twiml.voice_response import Play, VoiceResponse
+from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
+
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 account_sid = os.environ['TWILIO_ACCOUNT_SID']
 auth_token = os.environ['TWILIO_AUTH_TOKEN']
@@ -19,6 +23,7 @@ def main():
     }
 
 @app.route("/call", methods=['GET', 'POST'])
+@cross_origin()
 def outgoing_call():
     """Send a dynamic phone call"""
     print("REQUEST", request.data)
