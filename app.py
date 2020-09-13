@@ -15,6 +15,17 @@ client = Client(account_sid, auth_token)
 def main():
     return 'Message Forwarding System'
 
+@app.route("/call", methods=['GET', 'POST'])
+def outgoing_call():
+    """Send a dynamic phone call"""
+    call = client.calls.create(
+        to="+8326006867",
+        from_="+15122014739",
+        url="http://demo.twilio.com/docs/voice.xml"
+    )
+    print(call.sid)
+    
+
 @app.route("/sms", methods=['GET', 'POST'])
 def incoming_sms():
     """Send a dynamic reply to an incoming text message"""
