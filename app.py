@@ -39,6 +39,71 @@ def image():
     print(message.sid)
     return str(message.sid)
 
+@app.route('/custom_message', methods=['GET', 'POST'])
+@cross_origin()
+def custom_message():
+    content = request.json
+    message = content["message"]
+    phone = content["phone"]
+    message = client.messages.create(
+        body=message,
+        from_='+15122014739',
+        to='+1' + phone
+    )
+
+    print(message.sid)
+    return str(message.sid)
+
+@app.route('/cats', methods=['GET', 'POST'])
+@cross_origin()
+def cats():
+    content = request.json
+    facts = ["Cats have 4 legs"]
+    facts.append("The oldest known pet cat existed 9,500 years ago")
+    facts.append("Cats spend 70% of their lives sleeping")
+    facts.append("A cat was the Mayor of an Alaskan town for 20 years")
+    facts.append("The record for the longest cat ever is 48.5 inches")
+    facts.append("The richest cat in the world had £7 million")
+    facts.append("Cats walk like camels and giraffes")
+    facts.append("Isaac Newton invented the cat door")
+    facts.append("In 1963 a cat went to space")
+    facts.append("Ancient Egyptians would shave off their eyebrows when their cats died")
+    facts.append("House cats share 95.6% of their genetic makeup with tigers")
+    facts.append("A house cat can reach speeds of up to 30mph")    
+    random_number = random.randint(0,1)
+    phone = content["phone"]
+    message = client.messages.create(
+        body=facts[random_number],
+        from_='+15122014739',
+        to='+1' + phone
+    )
+
+    print(message.sid)
+    return str(message.sid)
+
+@app.route('/random_fact', methods=['GET', 'POST'])
+@cross_origin()
+def random_fact():
+    content = request.json
+    facts = ["Banging your head against a wall for one hour burns 150 calories."]
+    facts.append("In Switzerland it is illegal to own just one guinea pig.")
+    facts.append("Pteronophobia is the fear of being tickled by feathers.")
+    facts.append("Snakes can help predict earthquakes.")
+    facts.append("A flock of crows is known as a murder.")
+    facts.append("The oldest “your mom” joke was discovered on a 3,500 year old Babylonian tablet.")
+    facts.append("So far, two diseases have successfully been eradicated: smallpox and rinderpest.")
+    facts.append("29th May is officially “Put a Pillow on Your Fridge Day”.")
+    random_number = random.randint(0,len(facts) - 1)
+    phone = content["phone"]
+    message = client.messages.create(
+        body=facts[random_number],
+        from_='+15122014739',
+        to='+1' + phone
+    )
+
+    print(message.sid)
+    return str(message.sid)
+
 @app.route("/call", methods=['GET', 'POST'])
 @cross_origin()
 def outgoing_call():
