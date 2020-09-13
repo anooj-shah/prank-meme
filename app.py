@@ -35,9 +35,9 @@ def answer():
     """Respond to incoming phone calls with a brief message."""
     # Start our TwiML response
     response = VoiceResponse()
-    # response.play('https://api.twilio.com/cowbell.mp3')
+    response.play('https://api.twilio.com/cowbell.mp3')
     # Read a message aloud to the caller
-    response.say("Thank you for calling! Have a great day.")
+    # response.say("Thank you for calling! Have a great day.")
 
     return str(response)
 
