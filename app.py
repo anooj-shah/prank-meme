@@ -24,7 +24,7 @@ def outgoing_call():
     call = client.calls.create(
         to="+18326006867",
         from_="+15122014739",
-        url="https://prank-meme.herokuapp.com/answer"
+        url="http://prank-meme.herokuapp.com/answer"
     )
 
     print(call.sid)
@@ -34,13 +34,12 @@ def outgoing_call():
 def answer_call():
     """Respond to incoming phone calls with a brief message."""
     # Start our TwiML response
-    resp = VoiceResponse()
-    # response = VoiceResponse()
-    # response.play('https://api.twilio.com/cowbell.mp3')
+    response = VoiceResponse()
+    response.play('https://api.twilio.com/cowbell.mp3')
     # Read a message aloud to the caller
-    resp.say("Thank you for calling! Have a great day.", voice='alice')
+    # resp.say("Thank you for calling! Have a great day.", voice='alice')
 
-    return str(resp)
+    return str(response)
 
 @app.route("/sms", methods=['GET', 'POST'])
 def incoming_sms():
