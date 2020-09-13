@@ -15,7 +15,6 @@ account_sid = os.environ['TWILIO_ACCOUNT_SID']
 auth_token = os.environ['TWILIO_AUTH_TOKEN']
 client = Client(account_sid, auth_token)
 
-
 @app.route('/', methods=['GET'])
 def main():
     return {
@@ -26,6 +25,7 @@ def main():
 @cross_origin()
 def outgoing_call():
     """Send a dynamic phone call"""
+    print("CONSOLE", request.json)
     content = request.json
     print("REQUEST", content, content.phone)
     # phone_number = request.data.phone
