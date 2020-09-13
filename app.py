@@ -25,26 +25,44 @@ def main():
 @cross_origin()
 def outgoing_call():
     """Send a dynamic phone call"""
-    print("CONSOLE", request)
     content = request.json
-    print("REQUEST", content)
-    print(content["phone"])
+    type_of_message = content["type"]
     # phone_number = request.data.phone
-    call = client.calls.create(
-        to="+1" + content["phone"],
-        from_="+15122014739",
-        url="http://prank-meme.herokuapp.com/answer"
-    )
+    mp3_url="http://prank-meme.herokuapp.com/answer"
+
+    if type_of_message == "johncena":
+        call = client.calls.create (
+            to="+1" + content["phone"],
+            from_="+15122014739",
+            url="http://prank-meme.herokuapp.com/johncena"
+        )
+    elif:
+        call = client.calls.create(
+            to="+1" + content["phone"],
+            from_="+15122014739",
+            url="http://prank-meme.herokuapp.com/askyouhowyouare"
+        )
 
     print(call.sid)
     return str(call.sid)
     
-@app.route("/answer", methods=['GET', 'POST'])
+@app.route("/askyouhowyouare", methods=['GET', 'POST'])
 def answer():
     """Respond to incoming phone calls with a brief message."""
     # Start our TwiML response
     response = VoiceResponse()
-    response.play('https://drive.google.com/file/d/1OmbQ3S1M8ML-ieMVEZ3x3-et2MhliKiT/view?usp=sharing')
+    response.play('https://youcustomizeit.s3.us-east-2.amazonaws.com/how-are-you-meme.mp3')
+    # Read a message aloud to the caller
+    # response.say("Thank you for calling! Have a great day.")
+
+    return str(response)
+
+@app.route("/johncena", methods=['GET', 'POST'])
+def answer():
+    """Respond to incoming phone calls with a brief message."""
+    # Start our TwiML response
+    response = VoiceResponse()
+    response.play('https://youcustomizeit.s3.us-east-2.amazonaws.com/John+Cena+Meme+Original+Remastered+HD.mp3')
     # Read a message aloud to the caller
     # response.say("Thank you for calling! Have a great day.")
 
