@@ -27,7 +27,7 @@ def main():
 def outgoing_call():
     """Send a dynamic phone call"""
     content = request.get_json()
-    print("REQUEST", content.phone)
+    print("REQUEST", content, content.phone)
     # phone_number = request.data.phone
     call = client.calls.create(
         to="+1" + content.phone,
