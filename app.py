@@ -21,6 +21,8 @@ def main():
 @app.route("/call", methods=['GET', 'POST'])
 def outgoing_call():
     """Send a dynamic phone call"""
+    print("REQUEST", request.data)
+    # phone_number = request.data.phone
     call = client.calls.create(
         to="+18326006867",
         from_="+15122014739",
